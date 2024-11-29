@@ -25,7 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const scoreDisplay = document.getElementById("score");
   const highscoreDisplay = document.getElementById("highscore");
 
-  attemptsDisplay.textContent = attemptsLeft;
+  // Function to update attempts with hearts
+  const updateAttemptsDisplay = () => {
+    const hearts = '❤️'.repeat(attemptsLeft); // Repeat the heart emoji for remaining attempts
+    attemptsDisplay.innerHTML = `Attempts Left: ${hearts}`;
+  };
+
+  // Initial display update
+  updateAttemptsDisplay();
   scoreDisplay.textContent = score;
   highscoreDisplay.textContent = highscore;
 
@@ -64,13 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
       giveFeedback("Correct! Well done!", "green");
       correctNumber = Math.floor(Math.random() * max) + 1;
       attemptsLeft = 5;
-      attemptsDisplay.textContent = attemptsLeft;
+      updateAttemptsDisplay(); // Update attempts with hearts after correct guess
       scoreDisplay.textContent = score;
       highscoreDisplay.textContent = highscore;
       guessInput.value = "";
     } else {
       attemptsLeft--;
-      attemptsDisplay.textContent = attemptsLeft;
+      updateAttemptsDisplay(); // Update attempts with hearts after incorrect guess
 
       if (playerGuess < correctNumber) {
         giveFeedback("Too low!", "red");
@@ -83,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         score = 0;
         correctNumber = Math.floor(Math.random() * max) + 1;
         attemptsLeft = 5;
-        attemptsDisplay.textContent = attemptsLeft;
+        updateAttemptsDisplay(); // Reset attempts with hearts
         scoreDisplay.textContent = score;
         guessInput.value = "";
       }
