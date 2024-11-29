@@ -1,0 +1,160 @@
+/* General Page Styling */
+body {
+   margin: 0;
+   font-family: Arial, sans-serif;
+   background: linear-gradient(to bottom right, #dfffe0, #a8dbaf);
+   color: #000;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+}
+
+/* Main Game Area */
+.main {
+   text-align: center;
+   margin-bottom: 20px;
+}
+
+h1 {
+   font-size: 2.5em;
+   font-weight: bold;
+   margin-bottom: 15px;
+   color: #333;
+}
+
+input[type="number"] {
+   font-size: 1.2em;
+   padding: 10px;
+   border: 2px solid #a8dbaf;
+   border-radius: 25px;
+   text-align: center;
+   width: 250px;
+   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+   outline: none;
+   transition: border 0.3s ease-in-out;
+}
+
+input[type="number"]:focus {
+   border: 2px solid #6bbf76;
+}
+
+button {
+   font-size: 1.2em;
+   margin-left: 10px;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 25px;
+   background-color: #6bbf76;
+   color: white;
+   cursor: pointer;
+   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+   transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+   background-color: #519a5a;
+}
+
+/* Game Status Info */
+.status {
+   text-align: left;
+   font-size: 1.2em;
+   color: #333;
+}
+
+.status p {
+   margin: 5px 0;
+}
+
+span {
+   font-weight: bold;
+   color: #6bbf76;
+}
+
+/* Home Button */
+.home {
+   position: absolute;
+   top: 15px;
+   left: 15px;
+}
+
+.home a {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   background-color: white;
+   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+   text-decoration: none;
+   color: #333;
+   font-weight: bold;
+   transition: transform 0.3s ease-in-out;
+}
+
+.home a:hover {
+   transform: scale(1.1);
+}  
+
+.easy {
+   background: linear-gradient(135deg, #AAEAAA, #FFFFFF); /* Gradient background for easy level */
+   background-size: cover; /* Ensure it covers the entire area */
+   background-repeat: no-repeat; /* Prevent any repeating lines */
+}
+
+.med {
+   background: linear-gradient(135deg, rgb(255, 255, 178), #FFFFFF); /* Gradient with yellow and white */
+   background-size: cover; /* Ensure it covers the entire area */
+   background-repeat: no-repeat; /* Prevent any repeating lines */
+   height: 100vh; /* Ensure it spans the entire viewport height */
+   margin: 0; /* Remove default margin */
+}
+
+.hard {
+   background: linear-gradient(135deg, lightcoral, #FFFFFF); /* Gradient background for hard level */
+   background-size: cover; /* Ensure it covers the entire area */
+   background-repeat: no-repeat; /* Prevent any repeating lines */
+}   
+
+.highscore {
+   position: absolute; /* Position it absolutely on the page */
+   top: 15px; /* Add some space from the top */
+   right: 15px; /* Add some space from the right */
+   font-size: 1.2em; /* Slightly increase the font size */
+   font-weight: bold; /* Make the text bold */
+   color: #6bbf76; /* Use the same green color as the rest of the theme */
+   background-color: rgba(255, 255, 255, 0.8); /* Add a translucent white background for visibility */
+   padding: 10px 15px; /* Add some padding for a better look */
+   border-radius: 10px; /* Slightly round the corners */
+   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+.score {
+   position: absolute; /* Position it absolutely on the page */
+   top: 15px; /* Add some space from the top */
+   left: 15px; /* Add some space from the left */
+   font-size: 1.2em; /* Slightly increase the font size */
+   font-weight: bold; /* Make the text bold */
+   color: black; /* Use the same green color as the rest of the theme */
+   background-color: rgba(255, 255, 255, 0.8); /* Add a translucent white background for visibility */
+   padding: 10px 15px; /* Add some padding for a better look */
+   border-radius: 10px; /* Slightly round the corners */
+   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+.attempts {
+   margin-top: 20px; /* Add space between the input box and the attempts text */
+   font-size: 1.2em; /* Slightly increase the font size */
+   font-weight: bold; /* Make the text bold */
+   color: #6bbf76; /* Use a green color consistent with the theme */
+   background-color: rgba(255, 255, 255, 0.8); /* Add a translucent white background for visibility */
+   padding: 10px 15px; /* Add padding for a better look */
+   border-radius: 10px; /* Round the corners slightly */
+   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+   text-align: center; /* Center the text */
+   display: inline-block; /* Keep it inline and centered under the input */
+   width: auto; /* Ensure it adjusts to the text */
+}
