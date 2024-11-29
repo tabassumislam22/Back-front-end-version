@@ -25,9 +25,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const scoreDisplay = document.getElementById("score");
   const highscoreDisplay = document.getElementById("highscore");
 
-  // Function to update attempts with hearts
   const updateAttemptsDisplay = () => {
-    const hearts = '❤️'.repeat(attemptsLeft); // Repeat the heart emoji for remaining attempts
+    let hearts = '';
+
+    for (let i = 0; i < 5; i++) {
+      if (i < attemptsLeft) {
+        hearts += '❤️'; // Red heart for remaining attempts
+      } else {
+        hearts += '🤍'; // White heart for used-up attempts
+      }
+    }
+
     attemptsDisplay.innerHTML = `Attempts Left: ${hearts}`;
   };
 
@@ -36,25 +44,38 @@ document.addEventListener("DOMContentLoaded", () => {
   scoreDisplay.textContent = score;
   highscoreDisplay.textContent = highscore;
 
+  let currentFeedbackMessage = null;
+
   const giveFeedback = (message, color) => {
+
+    if (currentFeedbackMessage) {
+      currentFeedbackMessage.remove();
+    }
+
     guessInput.style.backgroundColor = color;
     const feedbackMessage = document.createElement("div");
     feedbackMessage.textContent = message;
     feedbackMessage.style.position = "absolute";
-    feedbackMessage.style.top = "20%";
+    feedbackMessage.style.top = "68%";
     feedbackMessage.style.left = "50%";
     feedbackMessage.style.transform = "translate(-50%, -50%)";
-    feedbackMessage.style.padding = "10px 20px";
+    feedbackMessage.style.padding = "5px 20px";
     feedbackMessage.style.borderRadius = "8px";
-    feedbackMessage.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    feedbackMessage.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
     feedbackMessage.style.color = "white";
     feedbackMessage.style.fontSize = "18px";
     feedbackMessage.style.zIndex = "10";
     document.body.appendChild(feedbackMessage);
 
+    currentFeedbackMessage = feedbackMessage;
+
     setTimeout(() => {
-      feedbackMessage.remove();
-    }, 1500);
+      guessInput.style.backgroundColor = "white";
+    }, 500);
+
+      setTimeout(() => {
+        currentFeedbackMessage.remove(); 
+      }, 5000);
   };
 
   const handleGuess = () => {
@@ -72,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       correctNumber = Math.floor(Math.random() * max) + 1;
       attemptsLeft = 5;
       updateAttemptsDisplay(); // Update attempts with hearts after correct guess
-      scoreDisplay.textContent = score;
+      scoreDisplay.textContent = score; 
       highscoreDisplay.textContent = highscore;
       guessInput.value = "";
     } else {
@@ -98,6 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   submitButton.addEventListener("click", handleGuess);
+
+  guessInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      handleGuess(); // Trigger the same function as the submit button click
+    }
+  });
+  
 });
-
-
