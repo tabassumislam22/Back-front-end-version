@@ -50,7 +50,8 @@ button {
    cursor: pointer;
    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
    transition: background-color 0.3s ease-in-out;
-}
+} 
+
 
 button:hover {
    background-color: #519a5a;
@@ -73,30 +74,46 @@ span {
 }
 
 /* Home Button */
-.home {
-   position: absolute;
-   top: 15px;
-   left: 15px;
-}
-
-.home a {
+.homebtn {
    display: flex;
-   align-items: center;
-   justify-content: center;
-   width: 50px;
-   height: 50px;
-   border-radius: 50%;
-   background-color: white;
-   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-   text-decoration: none;
-   color: #333;
-   font-weight: bold;
-   transition: transform 0.3s ease-in-out;
+   flex-direction: column; /* Stack items vertically */
+   align-items: center; /* Center items horizontally */
+   justify-content: center; /* Center items vertically */
+   width: 70px; /* Circular button size */
+   height: 70px; 
+   border-radius: 50%; /* Make it a perfect circle */
+   background-color: #6bbf76; /* Background color */
+   color: white; /* Text color */
+   font-size: 0.9em; /* Adjust font size for the word "Home" */
+   font-weight: bold; /* Make the text bold */
+   text-decoration: none; /* Remove underline */
+   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+   transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+   position: absolute; /* Position the button */
+   bottom: 15px; /* 15px from the bottom */
+   left: 15px; /* 15px from the left */
+   text-align: center; /* Center text */
+   cursor: pointer;
 }
 
-.home a:hover {
-   transform: scale(1.1);
-}  
+.homebtn:hover {
+   background-color: #519a5a; /* Change background color on hover */
+   transform: scale(1.1); /* Slightly enlarge the button on hover */
+}
+
+.homebtn span {
+   font-size: 1.2em; /* Adjust size of the emoji */
+   line-height: 1; /* Avoid extra space around the emoji */
+}
+
+.homebtn p {
+   margin: 0; /* Remove any default margin for the text */
+   font-size: 0.9em; /* Adjust size of the word "Home" */
+   line-height: 1.2; /* Slightly space out the text */
+}
+
+
+ 
 
 .easy {
    background: linear-gradient(135deg, #AAEAAA, #FFFFFF); /* Gradient background for easy level */
@@ -124,7 +141,7 @@ span {
    right: 15px; /* Add some space from the right */
    font-size: 1.2em; /* Slightly increase the font size */
    font-weight: bold; /* Make the text bold */
-   color: #6bbf76; /* Use the same green color as the rest of the theme */
+   color: black; /* Use the same green color as the rest of the theme */
    background-color: rgba(255, 255, 255, 0.8); /* Add a translucent white background for visibility */
    padding: 10px 15px; /* Add some padding for a better look */
    border-radius: 10px; /* Slightly round the corners */
@@ -144,16 +161,28 @@ span {
    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
 }
 
+/* Style for the attempts display */
 .attempts {
-   margin-top: 20px; /* Add space between the input box and the attempts text */
-   font-size: 1.2em; /* Slightly increase the font size */
-   font-weight: bold; /* Make the text bold */
-   color: #6bbf76; /* Use a green color consistent with the theme */
-   background-color: rgba(255, 255, 255, 0.8); /* Add a translucent white background for visibility */
-   padding: 10px 15px; /* Add padding for a better look */
+   position: absolute; /* Position it absolutely relative to the body */
+   bottom: 20px; /* Place it 20px from the bottom of the page */
+   left: 50%; /* Center it horizontally */
+   transform: translateX(-50%); /* Adjust to perfectly center it */
+   font-size: 1.2em; /* Make the font slightly larger */
+   font-weight: bold; /* Ensure the text is bold */
+   color: black; /* Use black text color */
+   background-color: rgba(255, 255, 255, 0.8); /* Add a translucent white background for contrast */
+   padding: 10px 15px; /* Add padding for better spacing */
    border-radius: 10px; /* Round the corners slightly */
    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-   text-align: center; /* Center the text */
-   display: inline-block; /* Keep it inline and centered under the input */
-   width: auto; /* Ensure it adjusts to the text */
+   text-align: center; /* Center-align the text */
+   display: inline-block; /* Keep it inline and centered */
+   width: auto; /* Ensure it adjusts dynamically to the content */
+   transition: all 0.3s ease-in-out; /* Add smooth transitions for hover effects */
 }
+
+
+.highscore span, 
+.score span, 
+.attempts span {
+    color: black; /* Make the text color for the counts black */
+}  
