@@ -7,17 +7,37 @@
     <link rel="stylesheet" href="page.css">
     <title>Guess Quest: Medium</title>
 </head>
-<body class="med">
+<body class="med" data-difficulty="medium">
+    <!-- Main Game Area -->
     <div class="main">
-        <h1>Guess the number from 1 - 30</h1>
-        <input type="text" placeholder="Enter number here!" id="guess">
-        <input type="submit" id="submit"> 
+        <h1>Guess the number<br>from 1 - 50</h1>
+        <!-- Input for guessing -->
+        <input 
+            type="number" 
+            placeholder="Enter number here!" 
+            id="guess" 
+            min="1" 
+            max="10">
+        <!-- Button to submit guess -->
+        <button id="submit">→</button>
+
     </div>
 
-    <a href="home.html" class="homebtn">Home</a>
-    <p class="attempts">Attempts Left:<span id="attempts" ></span></p>
-    <p class ="highscore">Highscore:<span id="highscore"></span></p>
-    <p class="score">Score:<span id="score"></span></p>
 
+    <a href="home.html" class="homebtn">
+        <span>🏠</span> <!-- Emoji for the house -->
+        <p>Home</p> <!-- Text for the button -->
+    </a>
+
+    <!--<div id="lose-screen" class="hide">
+        <h1>YOU LOSE</h1>
+        <button onclick="restartGame()">Try Again</button>
+        <button href="home.html">Quit</button>
+    </div> -->
+     
+    <p class="attempts"><span id="attempts" ></span></p> 
+    <p class ="highscore">Highscore:<span id="highscore"></span></p>
+    <p class="score">Score:<span id="score"></span></p>   
+ 
 </body>
 </html>
