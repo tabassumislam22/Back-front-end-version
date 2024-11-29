@@ -46,8 +46,7 @@ button {
    padding: 10px 20px;
    border: none;
    border-radius: 25px;
-   background-color: #6bbf76;
-   color: white;
+   color: black;
    cursor: pointer;
    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
    transition: background-color 0.3s ease-in-out;
