@@ -24,6 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const attemptsDisplay = document.getElementById("attempts");
   const scoreDisplay = document.getElementById("score");
   const highscoreDisplay = document.getElementById("highscore");
+  const correct = document.getElementById("correct-screen");
+  const main = document.querySelector(".main");
+  const losing = document.getElementById("lose-screen");
+  const newrnd = document.querySelector(".newrnd");
+  const restart = document.getElementById("restart");
+  const quit = document.getElementById("quit");
+  const home = document.getElementById("home");
+  const no = document.getElementById("no");
 
   const updateAttemptsDisplay = () => {
     let hearts = '';
@@ -64,7 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
     feedbackMessage.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
     feedbackMessage.style.color = "white";
     feedbackMessage.style.fontSize = "18px";
-    feedbackMessage.style.zIndex = "10";
+    feedbackMessage.style.zIndex = "20";
+    feedbackMessage.style.textAlign = "center";
     document.body.appendChild(feedbackMessage);
 
     currentFeedbackMessage = feedbackMessage;
@@ -77,6 +86,55 @@ document.addEventListener("DOMContentLoaded", () => {
         currentFeedbackMessage.remove(); 
       }, 5000);
   };
+
+  const losingScreen = () => {
+    losing.style.visibility = 'visible'; 
+  };
+
+  const correctScreen = () => {
+    main.style.visibility = 'hidden';
+
+    correct.style.visibility = 'visible'; 
+
+  };
+
+  home.addEventListener('click', function () {
+    quit.style.visibility = 'visible'; 
+  });
+
+  no.addEventListener('click', function () {
+    quit.style.visibility = 'hidden'; 
+  });
+
+  newrnd.addEventListener('click', function () {
+    resetGame();
+
+    main.style.visibility = 'visible';
+    correct.style.visibility = 'hidden'; 
+  });
+
+  const resetGame = () =>  {
+    losing.style.visibility = 'hidden'; 
+    correct.style.visibility = 'hidden'; 
+    main.style.visibility = 'visible';
+    correctNumber = Math.floor(Math.random() * max) + 1; // Get a new random number
+    attemptsLeft = 5; // Reset attempts or other necessary values
+    guessInput.value = ''; // Clear the guess input
+    currentFeedbackMessage.remove(); 
+    updateAttemptsDisplay();
+  }
+
+    const restartGame = () =>  {
+    losing.style.visibility = 'hidden'; 
+    correct.style.visibility = 'hidden'; 
+    main.style.visibility = 'visible';
+    correctNumber = Math.floor(Math.random() * max) + 1; // Get a new random number
+    attemptsLeft = 5; // Reset attempts or other necessary values
+    guessInput.value = ''; // Clear the guess input
+    updateAttemptsDisplay();
+    score = 0
+    currentFeedbackMessage.remove(); 
+  }
 
   const handleGuess = () => {
     const playerGuess = parseInt(guessInput.value);
@@ -96,6 +154,8 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreDisplay.textContent = score; 
       highscoreDisplay.textContent = highscore;
       guessInput.value = "";
+
+      correctScreen();
     } else {
       attemptsLeft--;
       updateAttemptsDisplay(); // Update attempts with hearts after incorrect guess
@@ -114,16 +174,19 @@ document.addEventListener("DOMContentLoaded", () => {
         updateAttemptsDisplay(); // Reset attempts with hearts
         scoreDisplay.textContent = score;
         guessInput.value = "";
+
+        losingScreen();
       }
     }
   };
 
   submitButton.addEventListener("click", handleGuess);
+  restart.addEventListener("click", restartGame);
 
   guessInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       handleGuess(); // Trigger the same function as the submit button click
     }
   });
-  
+
 });
