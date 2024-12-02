@@ -17,23 +17,50 @@
             placeholder="Enter number here!" 
             id="guess" 
             min="1" 
-            max="10">
+            max="100">
         <!-- Button to submit guess -->
         <button id="submit">→</button>
 
     </div>
 
-
-    <a href="home.html" class="homebtn">
-        <span>🏠</span> <!-- Emoji for the house -->
-        <p>Home</p> <!-- Text for the button -->
-    </a>
-     
+    <div id="home">
+        <button class="homebtn">
+            <span>🏠</span> <!-- Emoji for the house -->
+            <p>Home</p> <!-- Text for the button -->
+        </button>
+    </div>    
 
     <p class="attempts"><span id="attempts" ></span></p> 
-    <p class ="highscore">Highscore:<span id="highscore"></span></p>
-    <p class="score">Score:<span id="score"></span></p>   
+    <p class ="highscore">Highscore: <span id="highscore"></span></p>
+    <p class="score">Score: <span id="score"></span></p>   
  
+    <div id="lose-screen" class="hide">
+        <div class="losing">
+            <h1>YOU LOSE</h1>
+            <button onclick="restartGame()" id="restart">Try Again</button>
+            <a href="home.html" class="quitbtn">
+                <button>Quit</button>
+            </a>
+        </div>
+    </div>
+
+    <div id="correct-screen" class="correct">
+        <div class="correct">
+            <h1>Correct!</h1>
+            <button onclick="restartGame()" class="newrnd">NEXT →</button>
+        </div>
+    </div>
+
+    <div id="quit">
+        <div class="quit">
+            <h1>Quit</h1>
+            <p>(Are you sure you want to quit? Progress will be lost)</p>
+            <a href="home.html">
+                <button>Yes</button>
+            </a> 
+            <button id="no">No</button>
+        </div>
+    </div>
 
 </body>
 </html>
