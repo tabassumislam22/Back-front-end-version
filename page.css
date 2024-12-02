@@ -199,3 +199,72 @@ body {
        opacity: 1;
    }
 }
+
+/*LOSING SCREEN*/
+.hide{
+   background-color: rgba(0, 0, 0, 0.981);
+   position: fixed;
+   z-index: 11;
+   height: 100%;
+   width: 100%;
+   display: flex;            
+   justify-content: center; 
+   align-items: center;
+   visibility: hidden;
+   animation: fadeIn 1.5s ease-in-out;
+}
+
+.losing{
+   text-align: center;
+}
+
+.losing h1{
+   color: white;
+   font-size: 50px;
+}
+
+/*Correct Screen*/
+#correct-screen{
+   position: fixed;
+   z-index: 11;
+   height: 100%;
+   width: 100%;
+   display: flex;  
+   flex-direction: column;          
+   justify-content: center; 
+   visibility: hidden;
+   align-items: center;
+   text-align: center;
+}
+
+#correct-screen h1{
+   font-size: 55px;
+}
+
+/*Quit Screen*/
+#quit{
+   background-color: rgba(0, 0, 0, 0.981);
+   position: fixed;
+   z-index: 11;
+   height: 100%;
+   width: 100%;
+   display: flex;  
+   flex-direction: column;          
+   justify-content: center; 
+   align-items: center;
+   text-align: center;
+   color: white;
+   visibility: hidden;
+}
+
+#quit h1{
+   font-size: 55px;
+   color: white;
+}
+
+#quit button{
+   font-size: 25px;
+}
+#quit a{
+   text-decoration-line: none; /* there was a weird line doing this gets rid of it*/
+}
