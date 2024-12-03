@@ -1,0 +1,24 @@
+﻿Project Name: Guess Quest
+Course: EECS1012
+Team Members and Roles:
+1. Tabassum Islam (ID: 220253647)
+   * Role:
+      * Implemented difficulty selection feature (Easy, Medium, Hard).
+      * Developed the five-attempt limit per round and implemented the 'Game Over' logic with options to restart or return to the homepage.
+      * Designed and implemented the feedback system to guide players with 'higher' or 'lower' messages after each guess.
+      * Created the high score tracker to record the player’s best performance.
+2. Rebekah Uson (ID: 221123310)
+   * Role:
+      * Implemented the return-to-homepage button, allowing players to adjust difficulty easily.
+      * Developed the 'Next' button to transition smoothly to a new round after a correct guess.
+      * Ensured that the game generates a new random number for the same difficulty level in subsequent rounds.
+      * Designed difficulty-associated background changes to distinguish levels visually.
+      * Enhanced the user experience by implementing textbox color changes (green for correct answers, red for incorrect ones).
+Notes for the Instructional Team:
+* The project adheres to the functional requirements outlined in the project instructions.
+* We faced challenges debugging the feedback, five attempts limit, and 'Game Over' logic, but teamwork and discussions helped resolve these issues effectively.
+* Our group allocated tasks based on each member's strengths and ensured regular communication and collaboration to meet deadlines.
+* Although streak tracking was initially considered, it was replaced with a high score tracker to simplify progress tracking and align better with the game’s overall goals.
+* The codebase is well-documented, and we used version control to manage collaboration effectively.
+Acknowledgments:
+We appreciate the instructional team's support through lectures, labs, and office hours, which guided us in implementing this project.
