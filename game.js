@@ -1,23 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
   const difficulty = body.getAttribute("data-difficulty");
-  let max;
-
-  if (difficulty === "easy") {
-    max = 10;
-  } else if (difficulty === "medium") {
-    max = 50;
-  } else if (difficulty === "hard") {
-    max = 100;
-  } else {
-    console.error("Error: Difficulty not recognized! Defaulting to easy.");
-    max = 10;
-  }
-
-  let correctNumber = Math.floor(Math.random() * max) + 1;
-  let attemptsLeft = 5;
-  let score = 0;
-  let highscore = 0;
+  let roundId, max;
 
   const guessInput = document.getElementById("guess");
   const submitButton = document.getElementById("submit");
@@ -33,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const home = document.getElementById("home");
   const no = document.getElementById("no");
 
-  const updateAttemptsDisplay = () => {
+  const updateAttemptsDisplay = (attemptsLeft) => {
     let hearts = '';
 
     for (let i = 0; i < 5; i++) {
@@ -47,10 +31,57 @@ document.addEventListener("DOMContentLoaded", () => {
     attemptsDisplay.innerHTML = `Attempts Left: ${hearts}`;
   };
 
-  // Initial display update
-  updateAttemptsDisplay();
-  scoreDisplay.textContent = score;
-  highscoreDisplay.textContent = highscore;
+  const newRound = () => {
+    fetch('/newround', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ difficulty }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      roundId = data.roundId; // Store the roundId for later guesses
+      max = data.max;
+      updateAttemptsDisplay(5);
+      scoreDisplay.textContent = data.score;
+      highscoreDisplay.textContent = data.highscore;
+      losing.style.visibility = 'hidden'; 
+      correct.style.visibility = 'hidden'; 
+      main.style.visibility = 'visible';
+      guessInput.value = ''; // Clear the guess input
+      currentFeedbackMessage.remove(); 
+
+    })
+    .catch(error => console.error('Error starting the round:', error));
+  };
+
+  const handleGuess = () => {
+    const playerGuess = parseInt(guessInput.value);
+
+    if (isNaN(playerGuess) || playerGuess < 1 || playerGuess > max) {
+      giveFeedback(`Please enter a number between 1 and ${max}`, "orange");
+      return;
+    }
+
+    fetch(`/guess/${roundId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ guess: playerGuess }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      giveFeedback(data.feedback, data.correct ? "green" : "red");
+      updateAttemptsDisplay(data.attemptsLeft);
+      scoreDisplay.textContent = data.score;
+      highscoreDisplay.textContent = data.highscore;
+      
+      if (data.feedback.includes("Game Over!")) {
+        losingScreen();
+      } else if (data.correct) {
+        correctScreen();
+      }
+    })
+    .catch(error => console.error("Error submitting guess:", error));
+  };
 
   let currentFeedbackMessage = null;
 
@@ -93,9 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const correctScreen = () => {
     main.style.visibility = 'hidden';
-
     correct.style.visibility = 'visible'; 
-
   };
 
   home.addEventListener('click', function () {
@@ -107,22 +136,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   newrnd.addEventListener('click', function () {
-    resetGame();
+    newRound();
 
     main.style.visibility = 'visible';
     correct.style.visibility = 'hidden'; 
   });
-
-  const resetGame = () =>  {
-    losing.style.visibility = 'hidden'; 
-    correct.style.visibility = 'hidden'; 
-    main.style.visibility = 'visible';
-    correctNumber = Math.floor(Math.random() * max) + 1; // Get a new random number
-    attemptsLeft = 5; // Reset attempts or other necessary values
-    guessInput.value = ''; // Clear the guess input
-    currentFeedbackMessage.remove(); 
-    updateAttemptsDisplay();
-  }
 
     const restartGame = () =>  {
     losing.style.visibility = 'hidden'; 
@@ -131,54 +149,11 @@ document.addEventListener("DOMContentLoaded", () => {
     correctNumber = Math.floor(Math.random() * max) + 1; // Get a new random number
     attemptsLeft = 5; // Reset attempts or other necessary values
     guessInput.value = ''; // Clear the guess input
-    updateAttemptsDisplay();
-    score = 0
+    updateAttemptsDisplay(5);
+    score = 0;
     currentFeedbackMessage.remove(); 
   }
 
-  const handleGuess = () => {
-    const playerGuess = parseInt(guessInput.value);
-
-    if (isNaN(playerGuess) || playerGuess < 1 || playerGuess > max) {
-      giveFeedback(`Please enter a number between 1 and ${max}`, "orange");
-      return;
-    }
-
-    if (playerGuess === correctNumber) {
-      score++;
-      highscore = Math.max(highscore, score);
-      giveFeedback("Correct! Well done!", "green");
-      correctNumber = Math.floor(Math.random() * max) + 1;
-      attemptsLeft = 5;
-      updateAttemptsDisplay(); // Update attempts with hearts after correct guess
-      scoreDisplay.textContent = score; 
-      highscoreDisplay.textContent = highscore;
-      guessInput.value = "";
-
-      correctScreen();
-    } else {
-      attemptsLeft--;
-      updateAttemptsDisplay(); // Update attempts with hearts after incorrect guess
-
-      if (playerGuess < correctNumber) {
-        giveFeedback("Too low!", "red");
-      } else {
-        giveFeedback("Too high!", "red");
-      }
-
-      if (attemptsLeft === 0) {
-        giveFeedback(`Game Over! The correct number was ${correctNumber}`, "gray");
-        score = 0;
-        correctNumber = Math.floor(Math.random() * max) + 1;
-        attemptsLeft = 5;
-        updateAttemptsDisplay(); // Reset attempts with hearts
-        scoreDisplay.textContent = score;
-        guessInput.value = "";
-
-        losingScreen();
-      }
-    }
-  };
 
   submitButton.addEventListener("click", handleGuess);
   restart.addEventListener("click", restartGame);
@@ -188,5 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
       handleGuess(); // Trigger the same function as the submit button click
     }
   });
+
+  newRound();
 
 });
