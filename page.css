@@ -266,5 +266,5 @@ body {
    font-size: 25px;
 }
 #quit a{
-   text-decoration-line: none; /* there was a weird line doing this gets rid of it*/
+   text-decoration-line: none; /* there was a weird line, doing this gets rid of it*/
 }
